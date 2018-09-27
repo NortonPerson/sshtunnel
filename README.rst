@@ -179,6 +179,28 @@ Or simply using the CLI:
 
     (bash)$ python -m sshtunnel -U vagrant -P vagrant -L :3306 -R 127.0.0.1:3306 -p 2222 localhost
 
+Example 4
+---------
+
+Example of a dynamic port forwarding:
+
+.. code-block:: py
+    server = SSHTunnelForwarder(
+        '115.84.112.138',
+        ssh_username="user",
+        ssh_password="user",
+        dynamic_bind=True,
+        local_bind_address=('127.0.0.1', 1080),
+    
+    )
+
+    server.start()
+
+    print(server.local_bind_port)  # show assigned local port
+    # work with `SECRET SERVICE` through `server.local_bind_port`.
+
+    server.stop()
+
 CLI usage
 =========
 
